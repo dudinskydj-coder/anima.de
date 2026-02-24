@@ -830,7 +830,7 @@
     }
     .legalDoc{
       background:#fff;
-      --legalTitleColor:rgba(17,18,24,.90);
+      --legalTitleColor:rgba(17,18,24,.92);
       --legalTextColor:rgba(17,18,24,.92);
       padding-top:0;
       padding-left:0;
@@ -939,12 +939,12 @@
       align-items:flex-start;
       gap:12px;
       text-align:left;
-      padding:9px 0;
+      padding:5px 0;
       cursor:pointer;
-      color:rgba(17,18,24,.92);
+      color:#111218;
       font-family:"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
-      font-size:18px;
-      line-height:1.38;
+      font-size:20px;
+      line-height:1.34;
       letter-spacing:-.01em;
       font-weight:540;
       transition:color .16s ease;
@@ -952,11 +952,11 @@
     }
     .faqQuestionBtn:hover,
     .faqQuestionBtn:focus-visible{
-      color:rgba(17,18,24,.92);
+      color:#111218;
       text-decoration:none;
     }
     .faqItemOpen .faqQuestionBtn{
-      color:#000;
+      color:#111218;
     }
     .faqArrow{
       width:11px;
@@ -990,14 +990,14 @@
     .faqItemOpen .faqInlineAnswer{
       max-height:420px;
       opacity:1;
-      padding:0 0 16px 40px;
+      padding:0 0 10px 40px;
       transition:max-height .42s cubic-bezier(.22,.8,.24,1), opacity .28s ease;
     }
     .faqInlineText{
-      color:rgba(17,18,24,.92);
+      color:#111218;
       font-family:"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
-      font-size:18px;
-      line-height:1.4;
+      font-size:20px;
+      line-height:1.36;
       letter-spacing:-.01em;
       font-weight:520;
       white-space:pre-wrap;
@@ -1008,7 +1008,7 @@
     .faqItemOpen .faqInlineText{
       transform:translateY(0);
       opacity:1;
-      color:#000;
+      color:#111218;
       transition:transform .42s cubic-bezier(.22,.8,.24,1), opacity .28s ease, color .22s ease;
     }
     .faqInlineText .faqNote{
@@ -1031,16 +1031,16 @@
     }
     .faqIntro{
       margin:0 0 18px;
-      color:var(--legalTextColor) !important;
+      color:#0071e3 !important;
       font-family:"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
-      font-size:18px;
-      line-height:1.38;
+      font-size:32px;
+      line-height:1.16;
       letter-spacing:-.01em;
-      font-weight:540;
+      font-weight:640;
       transition:none;
     }
     .faqCard.faqCardActive .faqIntro{
-      color:var(--legalTextColor) !important;
+      color:#0071e3 !important;
     }
     .faqIntroGrid{
       display:grid;
@@ -1450,43 +1450,52 @@
         margin:14px 0 8px;
         line-height:1.4;
       }
+      .legalDocCard--impressum .legalDocFlat{
+        font-size:20px;
+        line-height:1.36;
+      }
       .faqQuestionBtn{
-        font-size:15px;
+        font-size:20px;
         line-height:1.36;
       }
       .faqInlineText{
-        font-size:15px;
+        font-size:20px;
         line-height:1.4;
+      }
+      .faqInlineText .faqNote{
+        font-size:17px;
       }
       .faqCard{
         border-radius:20px;
         padding:var(--legalGap) calc(var(--legalGap) + 8px);
       }
       .faqIntro{
-        font-size:15px;
+        font-size:48px;
+        line-height:1.24;
+        color:#0071e3 !important;
       }
       .faqIntroItem{
-        font-size:14px;
+        font-size:16px;
       }
       .faqAnswer p,
       .faqAnswer li{
-        font-size:15px;
+        font-size:17px;
         line-height:1.4;
       }
       .faqQuestionTitle{
-        font-size:clamp(21px, 6.2vw, 30px);
+        font-size:clamp(24px, 7.1vw, 35px);
       }
     }
     @media (min-width:700px) and (max-width:1024px){
       .legalModal{
-        --legalGap:34px;
-        --legalOuterX:40px;
-        --legalOuterY:36px;
-        --legalCloseInset:20px;
+        --legalGap:28px;
+        --legalOuterX:72px;
+        --legalOuterY:56px;
+        --legalCloseInset:18px;
       }
       .legalDialog{
         width:100%;
-        border-radius:26px;
+        border-radius:22px;
       }
       .legalScroll{
         padding:var(--legalGap);
@@ -1496,37 +1505,58 @@
         font-size:30px;
       }
       .legalDocTitle{
-        font-size:clamp(42px, 6.2vw, 56px);
+        font-size:clamp(30px, 8.6vw, 40px);
         margin:calc(var(--legalGap) + 14px) 0;
       }
       .legalDocCard{
-        border-radius:24px;
-        padding:var(--legalGap) calc(var(--legalGap) + 10px);
+        border-radius:20px;
+        padding:var(--legalGap) calc(var(--legalGap) + 8px);
       }
       .legalDocCard--impressum{
-        padding:var(--legalGap) calc(var(--legalGap) + 10px);
+        padding:var(--legalGap) calc(var(--legalGap) + 8px);
       }
       .legalDoc p,
       .legalDoc h2,
       .legalDocKicker,
       .legalDocLead,
       .legalDocSection{
-        font-size:18px;
-        line-height:1.42;
+        font-size:15px;
+        line-height:1.4;
+      }
+      .legalDocCard--impressum .legalDocFlat{
+        font-size:20px;
+        line-height:1.36;
       }
       .faqQuestionBtn{
-        font-size:18px;
+        font-size:20px;
+        line-height:1.36;
       }
       .faqInlineText{
-        font-size:18px;
+        font-size:20px;
+        line-height:1.4;
+      }
+      .faqInlineText .faqNote{
+        font-size:17px;
+      }
+      .faqIntro{
+        font-size:48px;
+        line-height:1.24;
+        color:#0071e3 !important;
+      }
+      .faqIntroItem{
+        font-size:16px;
       }
       .faqCard{
-        border-radius:24px;
-        padding:var(--legalGap) calc(var(--legalGap) + 10px);
+        border-radius:20px;
+        padding:var(--legalGap) calc(var(--legalGap) + 8px);
       }
       .faqAnswer p,
       .faqAnswer li{
-        font-size:18px;
+        font-size:17px;
+        line-height:1.4;
+      }
+      .faqQuestionTitle{
+        font-size:clamp(24px, 7.1vw, 35px);
       }
     }
     @media (min-width:1025px){
