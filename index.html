@@ -810,23 +810,27 @@
       border-radius:999px;
       background:#f3f3f7;
       color:#1b1b1f;
-      font-size:34px;
-      line-height:1;
+      font-size:0;
+      line-height:0;
       cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      display:block;
       padding:0;
     }
     .legalClose:hover{background:#ececf2}
-    .legalClose span{
-      transform:none;
-      display:inline-flex;
+    .legalClose::before{
+      content:"\00d7";
+      position:absolute;
+      inset:0;
+      display:flex;
       align-items:center;
       justify-content:center;
-      width:1em;
-      height:1em;
+      font-size:34px;
       line-height:1;
+      color:inherit;
+      pointer-events:none;
+    }
+    .legalClose span{
+      display:none;
     }
     .legalDoc{
       background:#fff;
@@ -858,7 +862,7 @@
       margin:0;
     }
     .legalTextZone{
-      --textZonePad:clamp(56px, 12.4vw, 94px);
+      --textZonePad:clamp(29px, 6.5vw, 49px);
       padding:var(--textZonePad);
       box-sizing:border-box;
       width:100%;
@@ -1439,7 +1443,7 @@
         padding:0;
       }
       .legalTextZone{
-        --textZonePad:clamp(56px, 15vw, 89px);
+        --textZonePad:clamp(29px, 7.7vw, 46px);
       }
       .legalDoc p{
         font-size:clamp(15px, 4.1vw, 20px);
@@ -1530,7 +1534,7 @@
         padding:0;
       }
       .legalTextZone{
-        --textZonePad:clamp(63px, 11.9vw, 94px);
+        --textZonePad:clamp(32px, 6.1vw, 49px);
       }
       .legalDoc p,
       .legalDoc h2,
@@ -1598,7 +1602,7 @@
         padding:0;
       }
       .legalTextZone{
-        --textZonePad:clamp(113px, 9.4vw, 145px);
+        --textZonePad:clamp(59px, 4.9vw, 75px);
       }
       .faqCard{
         padding:0;
