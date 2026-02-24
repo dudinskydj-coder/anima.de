@@ -1930,13 +1930,32 @@
     if(legalModal && !legalModal.hidden && faqState.active){
       openFaqList();
     }
+
+    try{
+      sessionStorage.setItem(LANG_SESSION_KEY, (t && t[lang]) ? lang : "de");
+    } catch(err){
+      // no-op: storage may be unavailable
+    }
   }
 
   const sel = document.getElementById("langSelect");
+  const LANG_SESSION_KEY = "anima_lang";
 
-  sel.addEventListener("change", e => applyLang(e.target.value));
+  if(sel){
+    sel.addEventListener("change", e => applyLang(e.target.value));
+  }
 
-  applyLang("de");
+  function getInitialLang(){
+    try{
+      const saved = sessionStorage.getItem(LANG_SESSION_KEY);
+      if(saved && t[saved]) return saved;
+    } catch(err){
+      // no-op: storage may be unavailable
+    }
+    return "de";
+  }
+
+  applyLang(getInitialLang());
 </script>
 </body>
 </html>
