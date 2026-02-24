@@ -114,6 +114,11 @@
       transform-origin:left center;
     }
     .right{display:flex;align-items:center}
+    .menuHoverZone{
+      flex:1 1 auto;
+      min-width:120px;
+      height:40px;
+    }
     .controls{
       display:flex;
       align-items:center;
@@ -632,6 +637,15 @@
     .footerLine:first-child{margin-top:0}
     footer a{text-decoration:none;color:inherit}
     footer a:hover{color:var(--text)}
+    .footerLegalLink{
+      -webkit-tap-highlight-color:transparent;
+      outline:none;
+    }
+    .footerLegalLink:focus,
+    .footerLegalLink:focus-visible{
+      outline:none;
+      color:inherit;
+    }
 
     /* Header overlays (Apple-like) */
     .overlay{
@@ -718,7 +732,7 @@
       font-weight:700;
       color:#1b1b1f;
       white-space:nowrap;
-      transition:color .16s ease, opacity .16s ease;
+      transition:color .16s ease;
     }
     #menuOverlay .menuGrid a{
       --line-index:0;
@@ -735,7 +749,7 @@
     }
     .menuGrid a:hover,
     .menuGrid a:focus-visible{
-      color:#000;
+      color:rgba(27,27,31,.58);
       opacity:1;
     }
 
@@ -813,22 +827,27 @@
       font-size:0;
       line-height:0;
       cursor:pointer;
-      display:block;
-      padding:0;
-    }
-    .legalClose:hover{background:#ececf2}
-    .legalClose::before{
-      content:"\00d7";
-      position:absolute;
-      inset:0;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:34px;
-      line-height:1;
-      color:inherit;
+      padding:0;
+    }
+    .legalClose:hover{background:#ececf2}
+    .legalClose::before,
+    .legalClose::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:18px;
+      height:2px;
+      border-radius:2px;
+      background:currentColor;
+      transform-origin:center;
       pointer-events:none;
     }
+    .legalClose::before{transform:translate(-50%,-50%) rotate(45deg)}
+    .legalClose::after{transform:translate(-50%,-50%) rotate(-45deg)}
     .legalClose span{
       display:none;
     }
@@ -855,7 +874,7 @@
       margin-bottom:32px;
     }
     .legalDocCard{
-      background:#f6f6f9;
+      background:var(--menuLayer);
       border:none;
       border-radius:28px;
       padding:0;
@@ -967,10 +986,9 @@
       line-height:1.34;
       letter-spacing:-.01em;
       font-weight:540;
-      transition:color .16s ease;
+      transition:none;
       text-decoration:none;
     }
-    .faqQuestionBtn:hover,
     .faqQuestionBtn:focus-visible{
       color:#111218;
       text-decoration:none;
@@ -985,33 +1003,26 @@
       line-height:1.2;
       color:rgba(17,18,24,.44);
       margin-top:4px;
-      transition:color .16s ease;
+      transition:none;
     }
-    .faqQuestionBtn:hover .faqArrow,
     .faqQuestionBtn:focus-visible .faqArrow{
       color:rgba(0,0,0,.78);
     }
     .faqItemOpen .faqArrow{
       color:rgba(0,0,0,.78);
     }
-    .faqList:has(li:hover:not(.faqItemOpen)) .faqItemOpen .faqArrow{
-      color:rgba(17,18,24,.44);
-    }
-    .faqList li:hover .faqArrow{
-      color:rgba(0,0,0,.78);
-    }
     .faqInlineAnswer{
       max-height:0;
       overflow:hidden;
       opacity:0;
-      transition:max-height .01s linear, opacity .01s linear, padding .01s linear;
+      transition:none;
       padding:0 0 0 40px;
     }
     .faqItemOpen .faqInlineAnswer{
       max-height:420px;
       opacity:1;
       padding:0 0 10px 40px;
-      transition:max-height .42s cubic-bezier(.22,.8,.24,1), opacity .28s ease;
+      transition:none;
     }
     .faqInlineText{
       color:#111218;
@@ -1021,15 +1032,15 @@
       letter-spacing:-.01em;
       font-weight:520;
       white-space:pre-wrap;
-      transform:translateY(-6px);
-      transition:transform .01s linear, opacity .01s linear, color .01s linear;
+      transform:none;
+      transition:none;
       opacity:0;
     }
     .faqItemOpen .faqInlineText{
-      transform:translateY(0);
+      transform:none;
       opacity:1;
       color:#111218;
-      transition:transform .42s cubic-bezier(.22,.8,.24,1), opacity .28s ease, color .22s ease;
+      transition:none;
     }
     .faqInlineText .faqNote{
       display:block;
@@ -1044,7 +1055,7 @@
       padding:0;
     }
     .faqCard{
-      background:#f6f6f9;
+      background:var(--menuLayer);
       border:none;
       border-radius:28px;
       padding:0;
@@ -1581,6 +1592,21 @@
         font-size:clamp(24px, 7.1vw, 35px);
       }
     }
+    @media (hover:hover) and (pointer:fine){
+      .faqQuestionBtn:hover{
+        color:#111218;
+        text-decoration:none;
+      }
+      .faqQuestionBtn:hover .faqArrow{
+        color:rgba(0,0,0,.78);
+      }
+      .faqList:has(li:hover:not(.faqItemOpen)) .faqItemOpen .faqArrow{
+        color:rgba(17,18,24,.44);
+      }
+      .faqList li:hover .faqArrow{
+        color:rgba(0,0,0,.78);
+      }
+    }
     @media (min-width:1025px){
       .legalModal{
         --legalGap:68px;
@@ -1617,6 +1643,7 @@
     <a class="brand" href="index.html" aria-label="ANIMA">
       <span class="brand-name" aria-hidden="true">ANIMA</span>
     </a>
+    <div class="menuHoverZone" id="menuHoverZone" aria-hidden="true"></div>
 
     <div class="right">
       <div class="controls">
@@ -1642,9 +1669,9 @@
   <div class="overlayInner">
     <nav class="menuGrid" aria-label="Main navigation">
       <div class="menuCol services">
-        <a href="#offer-frauen" id="menu_female">Laser-Haarentfernung Frauen</a>
-        <a href="#offer-herren" id="menu_male">Laser-Haarentfernung Herren</a>
-        <a href="#offer-detox" id="menu_wrap">Detox &amp; Thermo-Wickel</a>
+        <a href="Laser.html?laser=frauen" id="menu_female">Laser-Haarentfernung Frauen</a>
+        <a href="Laser.html?laser=herren" id="menu_male">Laser-Haarentfernung Herren</a>
+        <a href="detox-thermo.html" id="menu_wrap">Detox &amp; Thermo-Wickel</a>
       </div>
       <div class="menuCol info">
         <a href="#offer-gift" id="menu_gift">Geschenkgutschein</a>
@@ -1687,12 +1714,12 @@
 <div class="wrap" id="top">
 
   <section class="hero section heroApple" id="offer-frauen">
-    <div class="heroVisual reveal" aria-label="Women laser hair removal" data-more-href="frauen.html" tabindex="0">
+    <div class="heroVisual reveal" aria-label="Women laser hair removal" data-more-href="Laser.html?laser=frauen" tabindex="0">
       <div class="heroOverlay">
         <h1 id="hero_title">Laser-Haarentfernung Frauen.</h1>
         <p id="hero_sub">Deine Haut. Neu definiert.</p>
         <div class="btnRow">
-          <a class="btn primary" href="frauen.html" id="btn_book">Mehr erfahren</a>
+          <a class="btn primary" href="Laser.html?laser=frauen" id="btn_book">Mehr erfahren</a>
           <a class="btn" href="https://salonkee.de/salon/anima-body-care-salon" target="_blank" rel="noopener" id="btn_more">Termin buchen</a>
         </div>
       </div>
@@ -1700,12 +1727,12 @@
   </section>
 
   <section class="hero section heroApple" id="offer-herren">
-    <div class="heroVisual reveal" aria-label="Men laser hair removal" data-more-href="herren.html" tabindex="0">
+    <div class="heroVisual reveal" aria-label="Men laser hair removal" data-more-href="Laser.html?laser=herren" tabindex="0">
       <div class="heroOverlay">
         <h2 id="offer_herren_title">Laser-Haarentfernung Herren.</h2>
         <p id="offer_herren_sub">Kontrolle beginnt mit Details.</p>
         <div class="btnRow">
-          <a class="btn primary" href="herren.html" id="offer_herren_book">Mehr erfahren</a>
+          <a class="btn primary" href="Laser.html?laser=herren" id="offer_herren_book">Mehr erfahren</a>
           <a class="btn" href="https://salonkee.de/salon/anima-body-care-salon" target="_blank" rel="noopener" id="offer_herren_more">Termin buchen</a>
         </div>
       </div>
@@ -1751,7 +1778,7 @@
       <a href="https://www.instagram.com/anima.bodycare/" target="_blank" rel="noopener" id="footer_instagram">Instagram</a>
     </div>
     <div class="footerLine">
-      <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+      <a href="impressum.html" class="footerLegalLink">Impressum</a> · <a href="datenschutz.html" class="footerLegalLink">Datenschutz</a>
     </div>
   </footer>
 </div>
@@ -1774,6 +1801,7 @@
   const headerEl = document.querySelector("header");
   const menuTint = document.getElementById("menuTint");
   const menuFocusBlur = document.getElementById("menuFocusBlur");
+  const menuHoverZone = document.getElementById("menuHoverZone");
   const legalModal = document.getElementById("legalModal");
   const legalDoc = document.getElementById("legalDoc");
   const legalClose = document.getElementById("legalClose");
@@ -1792,6 +1820,7 @@
   let legalTouchStartX = null;
   let legalTouchStartY = null;
   let legalTouchStartScrollTop = 0;
+  let lastLegalTrigger = null;
   const faqState = { active:false, openIndex:null };
   const desktopHover = window.matchMedia("(hover: hover) and (pointer: fine)");
   const instantMenuMq = window.matchMedia("(max-width: 1024px)");
@@ -2153,7 +2182,7 @@
           <span>${item.q}</span>
         </button>
         <div class="faqInlineAnswer">
-          <div class="faqInlineText" data-faq-answer="${idx}"></div>
+          <div class="faqInlineText" data-faq-answer="${idx}">${formatFaqAnswer(item.a)}</div>
         </div>
       </li>
     `).join("");
@@ -2214,15 +2243,10 @@
     faqState.openIndex = safeIdx;
     legalDoc.querySelectorAll("[data-faq-item]").forEach((row) => {
       const rowIdx = Number(row.getAttribute("data-faq-item"));
-      const answer = row.querySelector("[data-faq-answer]");
       if(rowIdx === safeIdx){
         row.classList.add("faqItemOpen");
-        if(answer){
-          answer.innerHTML = formatFaqAnswer(list[safeIdx].a);
-        }
       } else {
         row.classList.remove("faqItemOpen");
-        if(answer) answer.textContent = "";
       }
     });
     const card = legalDoc.querySelector(".faqCard");
@@ -2235,8 +2259,6 @@
     const row = legalDoc ? legalDoc.querySelector(`[data-faq-item="${index}"]`) : null;
     if(row){
       row.classList.remove("faqItemOpen");
-      const answer = row.querySelector("[data-faq-answer]");
-      if(answer) answer.textContent = "";
     }
     const card = legalDoc ? legalDoc.querySelector(".faqCard") : null;
     if(card) card.classList.remove("faqCardActive");
@@ -2323,8 +2345,17 @@
     }
   }
 
-  function openLegalModal(href){
+  function openLegalModal(href, triggerEl){
     if(!legalModal || !legalDoc) return;
+    if(triggerEl && typeof triggerEl.blur === "function"){
+      lastLegalTrigger = triggerEl;
+      triggerEl.blur();
+    } else {
+      lastLegalTrigger = null;
+    }
+    if(document.activeElement && typeof document.activeElement.blur === "function"){
+      document.activeElement.blur();
+    }
     closeOverlays();
     faqState.active = false;
     faqState.openIndex = null;
@@ -2345,6 +2376,13 @@
       legalDoc.innerHTML = "";
       faqState.active = false;
       faqState.openIndex = null;
+      if(document.activeElement && typeof document.activeElement.blur === "function"){
+        document.activeElement.blur();
+      }
+      if(lastLegalTrigger && typeof lastLegalTrigger.blur === "function"){
+        lastLegalTrigger.blur();
+      }
+      lastLegalTrigger = null;
       body.classList.remove("legal-open");
       unlockBodyForLegal();
     }, 220);
@@ -2382,12 +2420,29 @@
       if(!searchOverlay.hidden) closeSearchOverlay();
     });
   }
+  if(menuHoverZone){
+    menuHoverZone.addEventListener("mouseenter", () => {
+      if(!desktopHover.matches) return;
+      if(!menuOverlay.hidden) return;
+      openOverlay("menu");
+    });
+  }
+  document.addEventListener("mouseout", (e) => {
+    if(!desktopHover.matches) return;
+    if(menuOverlay.hidden) return;
+    if(e.relatedTarget) return;
+    if(e.clientY <= 0) closeMenuOverlay();
+  });
+  window.addEventListener("blur", () => {
+    if(menuOverlay.hidden) return;
+    closeMenuOverlay();
+  });
 
   document.querySelectorAll('a[href="impressum.html"], a[href="datenschutz.html"]').forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const href = link.getAttribute("href");
-      openLegalModal(href);
+      openLegalModal(href, link);
     });
   });
   if(menuFaqLink){
