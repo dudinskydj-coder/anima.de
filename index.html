@@ -718,6 +718,7 @@
       font-weight:700;
       color:#1b1b1f;
       white-space:nowrap;
+      transition:color .16s ease, opacity .16s ease;
     }
     #menuOverlay .menuGrid a{
       --line-index:0;
@@ -732,7 +733,11 @@
     #menuOverlay.is-closing .menuGrid a{
       animation:menuTextLineOut .15s ease both;
     }
-    .menuGrid a:hover{opacity:.66}
+    .menuGrid a:hover,
+    .menuGrid a:focus-visible{
+      color:#000;
+      opacity:1;
+    }
 
     @media (min-width:921px){
       #menuOverlay.is-opening .menuGrid a{
@@ -826,7 +831,7 @@
     .legalDoc{
       background:#fff;
       --legalTitleColor:rgba(17,18,24,.90);
-      --legalTextColor:rgba(17,18,24,.72);
+      --legalTextColor:rgba(17,18,24,.92);
       padding-top:0;
       padding-left:0;
       padding-right:0;
@@ -934,20 +939,24 @@
       align-items:flex-start;
       gap:12px;
       text-align:left;
-      padding:16px 0;
+      padding:9px 0;
       cursor:pointer;
-      color:rgba(17,18,24,.78);
+      color:rgba(17,18,24,.92);
       font-family:"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
       font-size:18px;
       line-height:1.38;
       letter-spacing:-.01em;
       font-weight:540;
+      transition:color .16s ease;
+      text-decoration:none;
     }
-    .faqQuestionBtn:hover{
+    .faqQuestionBtn:hover,
+    .faqQuestionBtn:focus-visible{
       color:rgba(17,18,24,.92);
+      text-decoration:none;
     }
     .faqItemOpen .faqQuestionBtn{
-      color:rgba(17,18,24,.92);
+      color:#000;
     }
     .faqArrow{
       width:11px;
@@ -956,6 +965,20 @@
       line-height:1.2;
       color:rgba(17,18,24,.44);
       margin-top:4px;
+      transition:color .16s ease;
+    }
+    .faqQuestionBtn:hover .faqArrow,
+    .faqQuestionBtn:focus-visible .faqArrow{
+      color:rgba(0,0,0,.78);
+    }
+    .faqItemOpen .faqArrow{
+      color:rgba(0,0,0,.78);
+    }
+    .faqList:has(li:hover:not(.faqItemOpen)) .faqItemOpen .faqArrow{
+      color:rgba(17,18,24,.44);
+    }
+    .faqList li:hover .faqArrow{
+      color:rgba(0,0,0,.78);
     }
     .faqInlineAnswer{
       max-height:0;
@@ -971,7 +994,7 @@
       transition:max-height .42s cubic-bezier(.22,.8,.24,1), opacity .28s ease;
     }
     .faqInlineText{
-      color:rgba(17,18,24,.72);
+      color:rgba(17,18,24,.92);
       font-family:"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
       font-size:18px;
       line-height:1.4;
@@ -985,7 +1008,7 @@
     .faqItemOpen .faqInlineText{
       transform:translateY(0);
       opacity:1;
-      color:rgba(17,18,24,.90);
+      color:#000;
       transition:transform .42s cubic-bezier(.22,.8,.24,1), opacity .28s ease, color .22s ease;
     }
     .faqInlineText .faqNote{
@@ -1008,16 +1031,16 @@
     }
     .faqIntro{
       margin:0 0 18px;
-      color:rgba(17,18,24,.78);
+      color:var(--legalTextColor) !important;
       font-family:"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
       font-size:18px;
       line-height:1.38;
       letter-spacing:-.01em;
       font-weight:540;
-      transition:color .22s ease;
+      transition:none;
     }
     .faqCard.faqCardActive .faqIntro{
-      color:rgba(17,18,24,.90);
+      color:var(--legalTextColor) !important;
     }
     .faqIntroGrid{
       display:grid;
